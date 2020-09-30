@@ -1,1 +1,135 @@
+<!--
+  Tailwind UI components require Tailwind CSS v1.8 and the @tailwindcss/ui plugin.
+  Read the documentation to get started: https://tailwindui.com/documentation
+-->
+<div class="fixed z-10 inset-0 overflow-y-auto" [ngClass]="oculto">
+  <div class="flex items-start justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+    <!--
+      Background overlay, show/hide based on modal state.
 
+      Entering: "ease-out duration-300"
+        From: "opacity-0"
+        To: "opacity-100"
+      Leaving: "ease-in duration-200"
+        From: "opacity-100"
+        To: "opacity-0"
+    -->
+    <div class="fixed inset-0 transition-opacity">
+      <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+    </div>
+
+    <!-- This element is to trick the browser into centering the modal contents. -->
+    <!-- <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>&#8203; -->
+    <!--
+      Modal panel, show/hide based on modal state.
+
+      Entering: "ease-out duration-300"
+        From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+        To: "opacity-100 translate-y-0 sm:scale-100"
+      Leaving: "ease-in duration-200"
+        From: "opacity-100 translate-y-0 sm:scale-100"
+        To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+    -->
+    <form
+      class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl sm:w-full"
+      role="dialog" aria-modal="true" aria-labelledby="modal-headline" [formGroup]="forma" autocomplete="ÑÖcompletes"
+      (ngSubmit)="guardar()">
+      <button class="absolute right-0 p-4 text-gray-600 focus:outline-none" (click)="ocultar()" type="button">
+        <svg class="w-4 h-4 fill-current" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </button>
+      <div class="bg-white px-4 pt-5 pb-4 sm:py-6 sm:px-4 sm:pb-4">
+
+        <div class="sm:flex sm:items-start">
+
+          <div class="mt-3 text-center sm:mt-0  sm:text-left">
+            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
+              <span *ngIf="!propiedad?._id">Crear propiedad </span>
+              <span *ngIf="propiedad?._id"> Editar propiedad </span>
+            </h3>
+            <div class="mt-2">
+              <p class="text-sm leading-5 text-gray-500">
+                Por favor llene todos los datos antes de guardar
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 ">
+        <div class="px-4 pb-4">
+          <div class="flex-shrink-0 xs:h-40 h-56 w-full relative">
+            <img *ngIf="!imagenTemp" class="xs:h-40 w-full h-56 rounded-lg object-cover shadow-md"
+              [src]="propiedad?.fotografia | imagen:'propiedades'" [alt]="propiedad?.titulo">
+            <img *ngIf="imagenTemp" [src]="imagenTemp" class="xs:h-40 w-56 h-56 rounded-lg object-cover shadow-md">
+            <button type="button" (click)="subirImagen()"
+              class="p-2 rounded-full shadow-md absolute bg-indigo-600 text-white bottom-0 right-0 -mb-1 sm:-mb-4 -mr-2 focus:outline-none">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                  d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="grid col-span-2 grid-cols-2 gap-2 px-4 ">
+          <mat-form-field appearance="outline" class="col-span-2">
+            <mat-label>Titulo</mat-label>
+            <input matInput placeholder="Ej. Casa bonita en el centro de la ciudad" formControlName="titulo"
+              name='titulo' cdkFocusInitial>
+
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-span-2">
+            <mat-label>Dirección</mat-label>
+            <input matInput formControlName="direccion" name='direccion'>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Ciudad</mat-label>
+            <input matInput formControlName="ciudad" name='ciudad'>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>País</mat-label>
+            <input matInput formControlName="pais" name='pais'>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>N° Habitaciones</mat-label>
+            <input matInput formControlName="habitaciones" name='habitaciones'>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>N° Baños</mat-label>
+            <input matInput formControlName="banios" name='banios'>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-span-2">
+            <mat-label>Precio</mat-label>
+            <input matInput placeholder="Ej. 1900000" formControlName="precio" name='precio'>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+      <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+        <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
+          <button type="submit"
+            class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+            Guardar
+          </button>
+        </span>
+        <span class="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto  sm:ml-3">
+          <button type="button" (click)="ocultar()"
+            class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+            Cancel
+          </button>
+        </span>
+        <span class="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto" *ngIf="propiedad?._id">
+          <button type="button" (click)="borrarPropiedad(propiedad)"
+            class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+            Borrar
+          </button>
+        </span>
+      </div>
+    </form>
+  </div>
+</div>

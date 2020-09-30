@@ -1,0 +1,22 @@
+::ng-deep.mat-form-field {
+  @apply font-sans;
+
+  &.mat-focused {
+    @apply text-gray-900;
+
+    mat-label {
+      @apply text-gray-500;
+    }
+  }
+}
+
+
+::ng-deep.mat-tab-label {
+  @apply font-sans;
+
+
+}
+
+::ng-deep.mat-tab-label-active {
+  @apply text-gray-600 font-semibold;
+}

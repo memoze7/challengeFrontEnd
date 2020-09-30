@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -11,7 +12,8 @@ import { AccountDropdownComponent } from './account-dropdown/account-dropdown.co
   declarations: [CardComponent, NavbarComponent, AccountDropdownComponent],
   imports: [
     CommonModule,
-    BrowserModule
+    BrowserModule,
+    RouterModule
   ],
   exports: [CardComponent, NavbarComponent, AccountDropdownComponent]
 })

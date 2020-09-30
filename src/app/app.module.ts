@@ -1,3 +1,5 @@
+import { PipesModule } from './pipes/pipes.module';
+import { MaterialModule } from './material/material.module';
 import { PropiedadAdminModule } from './pages/propiedad-admin/propiedad-admin.module';
 import { UsersModule } from './pages/users/users.module';
 
@@ -10,6 +12,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ModalUploadComponent } from './components/modal-upload/modal-upload.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { appReducers } from './store/app.reducers';
+import { StoreModule } from '@ngrx/store';
+
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment'; // Angular CLI environment
+
+
 
 @NgModule({
   declarations: [
@@ -22,9 +33,26 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    PipesModule,
+
+    MaterialModule,
+    BrowserAnimationsModule,
+
     SharedModule,
     UsersModule,
-    PropiedadAdminModule
+    PropiedadAdminModule,
+
+
+    // ================================================================
+    // redux
+    // ================================================================
+    StoreModule.forRoot(appReducers),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

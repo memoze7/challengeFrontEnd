@@ -2,26 +2,29 @@
   Propiedades
 
 </h4>
-<!-- This is an example component -->
-<div class="relative max-w-screen-sm">
-  <label for="price" class="block text-sm leading-5 font-medium text-gray-700">Price</label>
-  <div class="mt-1 relative rounded-md shadow-sm">
-    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-      <span class="text-gray-500 sm:text-sm sm:leading-5">
-        $
-      </span>
-    </div>
-    <input id="price" class="form-input block w-full pl-7 pr-12 sm:text-sm sm:leading-5" placeholder="0.00">
-    <div class="absolute inset-y-0 right-0 flex items-center">
-      <select aria-label="Currency"
-        class="form-select h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm sm:leading-5">
-        <option>USD</option>
-        <option>CAD</option>
-        <option>EUR</option>
-      </select>
-    </div>
-  </div>
+<!-- header -->
+<div class="flex justify-end items-start ">
+  <!-- input de busqueda -->
+  <mat-form-field appearance="outline" class="font-sans">
+    <mat-label>Buscar</mat-label>
+    <input #input matInput placeholder="buscar" (keyup)="buscarPropiedad($event.target.value)" type="text">
+    <button matSuffix class="text-indigo-600 h-full focus:outline-none">
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd"
+          d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+          clip-rule="evenodd"></path>
+      </svg>
+    </button>
+  </mat-form-field>
+
+  <!-- fin e input de busqueda -->
+  <button
+    class="ml-2 bg-transparent hover:bg-indigo-500 text-indigo-700 font-semibold hover:text-white py-2 mt-1 px-4 border border-indigo-500 hover:border-transparent rounded text-sm"
+    (click)="openModal(null)">
+    Nuevo
+  </button>
 </div>
+<!-- fin header -->
 <div class="flex flex-col">
   <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -43,25 +46,24 @@
               </th>
               <th
                 class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
-                Estatus
+                Descripción
               </th>
               <th class="px-6 py-3 bg-gray-50"></th>
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
-            <tr *ngFor="let propiedad of propiedades">
+            <tr *ngFor="let propiedad of propiedades" class="animated fadeIn">
               <td class="px-6 py-4 whitespace-no-wrap">
                 <div class="flex items-center">
                   <div class="flex-shrink-0 h-10 w-10">
-                    <img class="h-10 w-10 rounded-lg"
-                      src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEylgd9&amp;auto=format&amp;fit=facearea&amp;facepad=4&amp;w=256&amp;h=256&amp;q=60"
-                      alt="">
+                    <img class="h-10 w-10 rounded-lg shadow-md" [src]="propiedad.fotografia | imagen:'propiedades'"
+                      [alt]="propiedad.titulo">
                   </div>
-                  <div class="ml-4 flex">
+                  <div class="ml-4">
                     <div class="text-sm leading-5 font-medium text-gray-900">
                       {{propiedad.titulo}}
                     </div>
-                    <div class="text-sm leading-5 text-gray-500">
+                    <div class="text-sm leading-5 text-gray-500 flex">
                       <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
                           d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
@@ -86,10 +88,11 @@
                 <div class="text-sm leading-5 text-gray-500">{{propiedad.banios}} baños</div>
               </td>
               <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                <button (click)="openModal(propiedad)"
+                  class="text-indigo-600 hover:text-indigo-900 focus:outline-none">Editar</button>
               </td>
             </tr>
-            <tr class="animate-pulse" *ngIf="cargando" ngFor="let item of [1,2,3,4,5]">
+            <tr class="animate-pulse animated fadeIn" *ngIf="cargando" ngFor="let item of [1,2,3,4,5]">
               <td class="px-6 py-4 whitespace-no-wrap">
                 <div class="flex items-center">
                   <div class="flex-shrink-0 h-10 w-10 bg-gray-400 rounded-lg">
@@ -123,15 +126,17 @@
             </tr>
           </tbody>
         </table>
-        <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+        <!-- paginado  -->
+        <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
+          *ngIf="paginado">
           <div class="flex-1 flex justify-between sm:hidden">
             <a href="#"
               class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
-              Previous
+              Anterior
             </a>
             <a href="#"
               class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
-              Next
+              Siguiente
             </a>
           </div>
           <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
@@ -147,7 +152,7 @@
               </p>
             </div>
             <div>
-              <nav class="relative z-0 inline-flex shadow-sm" [attr.disabled]="desde === 0" (click)="cargarDesde(-20)">
+              <nav class="relative z-0 inline-flex shadow-sm" [attr.disabled]="desde === 0" (click)="cargarDesde(-10)">
                 <a href="#"
                   class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150"
                   aria-label="Previous">
@@ -158,7 +163,7 @@
                       clip-rule="evenodd" />
                   </svg>
                 </a>
-                <a href="#" [attr.disabled]="desde + 20 > totalRegistro" (click)="cargarDesde(20)"
+                <a href="#" [attr.disabled]="desde + 20 > totalRegistro" (click)="cargarDesde(10)"
                   class="-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150"
                   aria-label="Next">
                   <!-- Heroicon name: chevron-right -->
@@ -176,3 +181,5 @@
     </div>
   </div>
 </div>
+
+<app-detail-propiedad-admin></app-detail-propiedad-admin>
