@@ -1,0 +1,178 @@
+<h4 class="text-4xl pb-2">
+  Propiedades
+
+</h4>
+<!-- This is an example component -->
+<div class="relative max-w-screen-sm">
+  <label for="price" class="block text-sm leading-5 font-medium text-gray-700">Price</label>
+  <div class="mt-1 relative rounded-md shadow-sm">
+    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+      <span class="text-gray-500 sm:text-sm sm:leading-5">
+        $
+      </span>
+    </div>
+    <input id="price" class="form-input block w-full pl-7 pr-12 sm:text-sm sm:leading-5" placeholder="0.00">
+    <div class="absolute inset-y-0 right-0 flex items-center">
+      <select aria-label="Currency"
+        class="form-select h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm sm:leading-5">
+        <option>USD</option>
+        <option>CAD</option>
+        <option>EUR</option>
+      </select>
+    </div>
+  </div>
+</div>
+<div class="flex flex-col">
+  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead>
+            <tr>
+              <th
+                class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                Titulo
+              </th>
+              <th
+                class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">
+                Dirección
+              </th>
+              <th
+                class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
+                Precio
+              </th>
+              <th
+                class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
+                Estatus
+              </th>
+              <th class="px-6 py-3 bg-gray-50"></th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <tr *ngFor="let propiedad of propiedades">
+              <td class="px-6 py-4 whitespace-no-wrap">
+                <div class="flex items-center">
+                  <div class="flex-shrink-0 h-10 w-10">
+                    <img class="h-10 w-10 rounded-lg"
+                      src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEylgd9&amp;auto=format&amp;fit=facearea&amp;facepad=4&amp;w=256&amp;h=256&amp;q=60"
+                      alt="">
+                  </div>
+                  <div class="ml-4 flex">
+                    <div class="text-sm leading-5 font-medium text-gray-900">
+                      {{propiedad.titulo}}
+                    </div>
+                    <div class="text-sm leading-5 text-gray-500">
+                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                          d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                          clip-rule="evenodd"></path>
+                      </svg>
+                      {{propiedad.pais}}
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-no-wrap hidden lg:table-cell">
+                <div class="text-sm leading-5 text-gray-900">{{propiedad.ciudad}}</div>
+                <div class="text-sm leading-5 text-gray-500">{{propiedad.direccion}}</div>
+              </td>
+              <td class="px-6 py-4 whitespace-no-wrap hidden sm:table-cell">
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold ">
+                  {{propiedad.precio | currency}}
+                </span>
+              </td>
+              <td class=" px-6 py-4 whitespace-no-wrap text-sm leading-5 hidden sm:table-cell">
+                <div class="text-sm leading-5 text-gray-900">{{propiedad.habitaciones}} habitaciones</div>
+                <div class="text-sm leading-5 text-gray-500">{{propiedad.banios}} baños</div>
+              </td>
+              <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+              </td>
+            </tr>
+            <tr class="animate-pulse" *ngIf="cargando" ngFor="let item of [1,2,3,4,5]">
+              <td class="px-6 py-4 whitespace-no-wrap">
+                <div class="flex items-center">
+                  <div class="flex-shrink-0 h-10 w-10 bg-gray-400 rounded-lg">
+
+                  </div>
+                  <div class="ml-4 space-y-2">
+                    <div class="h-4 bg-gray-400 rounded w-32 "></div>
+                    <div class="h-2 bg-gray-400 rounded w-20 "></div>
+                  </div>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-no-wrap hidden lg:table-cell space-y-2">
+
+                <div class="h-4 bg-gray-400 rounded w-24 "></div>
+                <div class="h-2 bg-gray-400 rounded w-16 "></div>
+
+              </td>
+              <td class="px-6 py-4 whitespace-no-wrap hidden sm:table-cell">
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                  <div class="h-4 bg-gray-400 rounded w-10 "></div>
+                </span>
+              </td>
+              <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500 hidden sm:table-cell">
+                <div class="h-4 bg-gray-400 rounded w-16 "></div>
+
+              </td>
+              <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+                <div class="h-4 bg-gray-400 rounded w-6 ml-auto"></div>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+          <div class="flex-1 flex justify-between sm:hidden">
+            <a href="#"
+              class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
+              Previous
+            </a>
+            <a href="#"
+              class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
+              Next
+            </a>
+          </div>
+          <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+            <div>
+              <p class="text-sm leading-5 text-gray-700">
+                Mostrando
+                <span class="font-medium">{{desde + 1}}</span>
+                a
+                <span class="font-medium">{{desde + 20 > totalRegistro ? totalRegistro : desde + 20}}</span>
+                de
+                <span class="font-medium">{{totalRegistro}}</span>
+                Propiedades
+              </p>
+            </div>
+            <div>
+              <nav class="relative z-0 inline-flex shadow-sm" [attr.disabled]="desde === 0" (click)="cargarDesde(-20)">
+                <a href="#"
+                  class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150"
+                  aria-label="Previous">
+                  <!-- Heroicon name: chevron-left -->
+                  <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                      d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                      clip-rule="evenodd" />
+                  </svg>
+                </a>
+                <a href="#" [attr.disabled]="desde + 20 > totalRegistro" (click)="cargarDesde(20)"
+                  class="-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150"
+                  aria-label="Next">
+                  <!-- Heroicon name: chevron-right -->
+                  <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                      clip-rule="evenodd" />
+                  </svg>
+                </a>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
