@@ -1,3 +1,7 @@
-<li *ngFor="let item of propiedades">
-  {{item}}
-</li>
+<div class="py-12 pl-8">
+  <div class="grid grid-cols-1 gap-8 lg:px-32 sm:grid-cols-2 sm:gap-12 lg:grid-cols-3 lg:gap-20">
+    <div *ngFor="let propiedad of propiedades">
+      <app-card [propiedad]="propiedad"></app-card>
+    </div>
+  </div>
+</div>

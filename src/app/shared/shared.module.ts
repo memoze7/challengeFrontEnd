@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { CardComponent } from './card/card.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AccountDropdownComponent } from './account-dropdown/account-dropdown.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 
 
@@ -13,7 +14,8 @@ import { AccountDropdownComponent } from './account-dropdown/account-dropdown.co
   imports: [
     CommonModule,
     BrowserModule,
-    RouterModule
+    RouterModule,
+    PipesModule
   ],
   exports: [CardComponent, NavbarComponent, AccountDropdownComponent]
 })

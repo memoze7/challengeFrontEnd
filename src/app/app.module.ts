@@ -1,3 +1,4 @@
+import { PropiedadComponent } from './pages/propiedad/propiedad/propiedad.component';
 import { PipesModule } from './pipes/pipes.module';
 import { MaterialModule } from './material/material.module';
 import { PropiedadAdminModule } from './pages/propiedad-admin/propiedad-admin.module';
@@ -19,6 +20,7 @@ import { StoreModule } from '@ngrx/store';
 
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment'; // Angular CLI environment
+import { PropiedadModule } from './pages/propiedad/propiedad.module';
 
 
 
@@ -43,6 +45,7 @@ import { environment } from '../environments/environment'; // Angular CLI enviro
     SharedModule,
     UsersModule,
     PropiedadAdminModule,
+    PropiedadModule,
 
 
     // ================================================================
