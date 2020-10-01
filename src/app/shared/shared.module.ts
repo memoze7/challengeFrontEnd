@@ -1,3 +1,4 @@
+import { AuthModule } from './../pages/auth/auth.module';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -15,7 +16,8 @@ import { PipesModule } from '../pipes/pipes.module';
     CommonModule,
     BrowserModule,
     RouterModule,
-    PipesModule
+    PipesModule,
+    AuthModule
   ],
   exports: [CardComponent, NavbarComponent, AccountDropdownComponent]
 })

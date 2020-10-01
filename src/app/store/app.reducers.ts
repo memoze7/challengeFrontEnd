@@ -6,9 +6,11 @@ import * as reducers from './reducers';
 export interface AppState {
   propiedad: reducers.PropiedadState;
   subirArchivo: reducers.SubirArchivoState;
+  auth: reducers.AuthState;
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
   propiedad: reducers.propiedadReducer,
-  subirArchivo: reducers.subirArchivoReducer
+  subirArchivo: reducers.subirArchivoReducer,
+  auth: reducers.AuthStateReducer
 }

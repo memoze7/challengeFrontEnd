@@ -1,3 +1,4 @@
+import { UsuarioService } from './../../services/usuario.service';
 
 import { Component, OnInit } from '@angular/core';
 
@@ -10,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class AccountDropdownComponent implements OnInit {
   isOpen = false;
 
-  constructor() { }
+  constructor(public usuarioService: UsuarioService) { }
 
   ngOnInit(): void { }
 

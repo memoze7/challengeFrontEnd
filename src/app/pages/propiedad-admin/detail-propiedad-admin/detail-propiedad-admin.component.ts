@@ -24,7 +24,8 @@ export class DetailPropiedadAdminComponent implements OnInit, OnDestroy {
   imagenTemp: string;
   archivoSubir: File;
 
-  constructor(private _store: Store<AppState>, private _propiedadesService: PropiedadesService, private _fb: FormBuilder, private _subirArchivoService: SubirArchivoService) { }
+  constructor(private _store: Store<AppState>, private _propiedadesService: PropiedadesService,
+    private _fb: FormBuilder, private _subirArchivoService: SubirArchivoService) { }
 
   ngOnInit(): void {
     this.crearForma();
@@ -39,14 +40,12 @@ export class DetailPropiedadAdminComponent implements OnInit, OnDestroy {
 
   setSubscription() {
 
-
     this._subscription.add(
       this._store.select('propiedad')
         .subscribe((data) => {
           this.oculto = data.ocultar;
           if (data.mostrar) {
             this._store.dispatch(ownActions.borrarImagenTemp());
-
           }
           if (this.propiedad !== data.propiedad) {
             this.propiedad = data.propiedad;

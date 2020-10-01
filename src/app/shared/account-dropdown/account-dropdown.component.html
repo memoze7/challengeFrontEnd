@@ -8,9 +8,8 @@
   <button *ngIf="isOpen" (click)="isOpen = false"
     class="fixed inset-0 w-full h-full bg-black opacity-50 cursor-default  z-40" tabindex="-1"></button>
   <div *ngIf="isOpen" class=" absolute right-0 w-48 mt-2 bg-white rounded-lg py-2 text-gray-800 shadow-xl z-40">
-    <a href="#" class="block px-4 py-2 hover:bg-indigo-500 hover:text-white">Account setting</a>
-    <a href="#" class="block px-4 py-2 hover:bg-indigo-500 hover:text-white">Support</a>
-    <a href="#" class="block px-4 py-2 hover:bg-indigo-500 hover:text-white">Sing Out</a>
+    <a href="#" class="block px-4 py-2 hover:bg-indigo-500 hover:text-white"
+      (click)="this.usuarioService.logout()">Cerrar sesión</a>
   </div>
 
 </div>
