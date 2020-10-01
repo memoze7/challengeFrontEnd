@@ -1,3 +1,4 @@
+import { InterceptorService } from './interceptors/interceptor.service';
 import { ComponentsModule } from './components/components.module';
 import { PropiedadComponent } from './pages/propiedad/propiedad/propiedad.component';
 import { PipesModule } from './pipes/pipes.module';
@@ -12,7 +13,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { appReducers } from './store/app.reducers';
@@ -56,7 +57,11 @@ import { PropiedadModule } from './pages/propiedad/propiedad.module';
       logOnly: environment.production, // Restrict extension to log-only mode
     }),
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: InterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

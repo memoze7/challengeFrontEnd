@@ -19,8 +19,8 @@ export class SignUpComponent implements OnInit {
   cargando = false;
 
 
-  constructor(private _store: Store<AppState>, private _fb: FormBuilder, private _router: Router,
-    private _usuarioService: UsuarioService) { }
+  constructor(private _store: Store<AppState>, private _fb: FormBuilder,
+    private _router: Router, private _usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
     this.crearForm();
@@ -50,6 +50,7 @@ export class SignUpComponent implements OnInit {
   registrarUsuario() {
 
     if (this.forma.invalid) return;
+
     const { nombre, email, password } = this.forma.value;
 
     this.cargando = true;
@@ -61,7 +62,8 @@ export class SignUpComponent implements OnInit {
         this.cargando = false;
         this.forma.reset();
         this.iniciarSesion();
-      });
+      }, error => this.cargando = false
+      );
   }
 
 }

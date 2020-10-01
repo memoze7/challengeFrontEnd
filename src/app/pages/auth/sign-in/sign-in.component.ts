@@ -65,7 +65,8 @@ export class SignInComponent implements OnInit {
         Swal.fire('Inició sesión', `Bienvenido ${resp.nombre}`, 'success');
 
         this.ocultar();
-      });
+      }, error => this.cargando = false
+      );
 
   }
 
