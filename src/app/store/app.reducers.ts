@@ -6,11 +6,15 @@ import * as reducers from './reducers';
 export interface AppState {
   propiedad: reducers.PropiedadState;
   subirArchivo: reducers.SubirArchivoState;
+  modalDetail: reducers.ModalDetailState;
   auth: reducers.AuthState;
+  usuario: reducers.UsuarioState;
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
   propiedad: reducers.propiedadReducer,
   subirArchivo: reducers.subirArchivoReducer,
-  auth: reducers.AuthStateReducer
+  modalDetail: reducers.modalDetailReducer,
+  auth: reducers.AuthStateReducer,
+  usuario: reducers.usuarioReducer
 }

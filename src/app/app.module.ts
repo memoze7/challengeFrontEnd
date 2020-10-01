@@ -1,3 +1,4 @@
+import { ComponentsModule } from './components/components.module';
 import { PropiedadComponent } from './pages/propiedad/propiedad/propiedad.component';
 import { PipesModule } from './pipes/pipes.module';
 import { MaterialModule } from './material/material.module';
@@ -11,7 +12,6 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ModalUploadComponent } from './components/modal-upload/modal-upload.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -26,9 +26,7 @@ import { PropiedadModule } from './pages/propiedad/propiedad.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ModalUploadComponent,
-
+    AppComponent
   ],
   imports: [
     CommonModule,
@@ -46,6 +44,7 @@ import { PropiedadModule } from './pages/propiedad/propiedad.module';
     UsersModule,
     PropiedadAdminModule,
     PropiedadModule,
+    ComponentsModule,
 
 
     // ================================================================

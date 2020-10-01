@@ -34,22 +34,26 @@
 
       <a [routerLink]="[ '/propiedades' ]" routerLinkActive="active"
         class="px-2 py-1 block  text-white font-semibold hover:bg-gray-800 rounded-lg"
-        *ngIf="this.usuarioService.isAdmin()">Propiedades
+        *ngIf="usuarioService.isAdmin()">Propiedades
+      </a>
+      <a [routerLink]="[ '/usuarios' ]" routerLinkActive="active"
+        class="px-2 py-1 block  text-white font-semibold hover:bg-gray-800 rounded-lg"
+        *ngIf="usuarioService.isAdmin()">Usuarios
       </a>
       <a (click)="openAuth('signIn')"
         class="px-2 py-1  mt-1  sm:mt-0 sm:ml-2 text-white font-semibold hover:bg-gray-800 rounded-lg hidden sm:block cursor-pointer"
-        *ngIf="!this.usuarioService.isLogged()">Log
+        *ngIf="!usuarioService.isLogged()">Log
         in</a>
       <a (click)="openAuth('signUp')"
         class="px-2 py-1 mt-1  sm:mt-0 sm:ml-2 text-white font-semibold bg-indigo-800 hover:bg-indigo-900 rounded-lg hidden sm:block cursor-pointer"
-        *ngIf="!this.usuarioService.isLogged()">Sign
+        *ngIf="!usuarioService.isLogged()">Sign
         up</a>
 
 
     </div>
 
-    <app-account-dropdown class="sm:ml-6 hidden sm:block"></app-account-dropdown>
-    <div class="px-4 py-5 border-t border-gray-800 sm:hidden flex" *ngIf="!this.usuarioService.isLogged()">
+    <app-account-dropdown class="sm:ml-6 hidden sm:block" *ngIf="usuarioService.isLogged()"></app-account-dropdown>
+    <div class="px-4 py-5 border-t border-gray-800 sm:hidden flex" *ngIf="!usuarioService.isLogged()">
       <a (click)="openAuth('signUp')"
         class="px-2 py-1 mt-1  sm:mt-0 text-white font-semibold bg-indigo-800 hover:bg-indigo-900 rounded-lg block cursor-pointer">Sign
         up</a>
@@ -57,16 +61,17 @@
         class="px-2 py-1  mt-1  sm:mt-0 ml-2 text-white font-semibold hover:bg-gray-800 rounded-lg block cursor-pointer">Log
         in</a>
     </div>
-    <div class="px-4 py-5 border-t border-gray-800 sm:hidden" *ngIf="this.usuarioService.isLogged()">
+    <div class="px-4 py-5 border-t border-gray-800 sm:hidden" *ngIf="usuarioService.isLogged()">
       <div class="flex items-center">
         <img class="h-8 w-8 border-2 border-gray-600 object-cover rounded-full"
-          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60avatar"
-          alt="">
-        <span class="ml-3 font-semibold text-white">{{this.usuarioService.usuario?.nombre}}</span>
+          [src]="usuarioService.usuario.img | imagen" [alt]="usuarioService.usuario.nombre">
+        <span class="ml-3 font-semibold text-white">{{usuarioService.usuario?.nombre}}</span>
       </div>
       <div class="mt-4">
-        <a (click)="usuarioService.logout()" class="mt-2 block text-gray-400 hover:text-white cursor-pointer">Sign
-          out</a>
+        <a (click)="mostrarCuenta()" class="mt-2 block text-gray-400 hover:text-white cursor-pointer">Mi
+          cuenta</a>
+        <a (click)="usuarioService.logout()" class="mt-2 block text-gray-400 hover:text-white cursor-pointer">cerrar
+          sesión</a>
       </div>
     </div>
 

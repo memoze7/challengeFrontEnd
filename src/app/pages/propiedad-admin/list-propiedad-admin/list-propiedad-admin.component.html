@@ -15,9 +15,7 @@
           clip-rule="evenodd"></path>
       </svg>
     </button>
-  </mat-form-field>
-
-  <!-- fin e input de busqueda -->
+  </mat-form-field> <!-- fin e input de busqueda -->
   <button
     class="ml-2 bg-transparent hover:bg-indigo-500 text-indigo-700 font-semibold hover:text-white py-2 mt-1 px-4 border border-indigo-500 hover:border-transparent rounded text-sm"
     (click)="openModal(null)">
@@ -130,11 +128,11 @@
         <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
           *ngIf="paginado">
           <div class="flex-1 flex justify-between sm:hidden">
-            <a href="#"
+            <a (click)="cargarDesde(-10)"
               class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
               Anterior
             </a>
-            <a href="#"
+            <a (click)="cargarDesde(10)"
               class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
               Siguiente
             </a>
@@ -145,15 +143,15 @@
                 Mostrando
                 <span class="font-medium">{{desde + 1}}</span>
                 a
-                <span class="font-medium">{{desde + 20 > totalRegistro ? totalRegistro : desde + 20}}</span>
+                <span class="font-medium">{{desde + 10 > totalRegistro ? totalRegistro : desde + 10}}</span>
                 de
                 <span class="font-medium">{{totalRegistro}}</span>
                 Propiedades
               </p>
             </div>
             <div>
-              <nav class="relative z-0 inline-flex shadow-sm" [attr.disabled]="desde === 0" (click)="cargarDesde(-10)">
-                <a href="#"
+              <nav class="relative z-0 inline-flex shadow-sm">
+                <a (click)="cargarDesde(-10)"
                   class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150"
                   aria-label="Previous">
                   <!-- Heroicon name: chevron-left -->
@@ -163,7 +161,7 @@
                       clip-rule="evenodd" />
                   </svg>
                 </a>
-                <a href="#" [attr.disabled]="desde + 20 > totalRegistro" (click)="cargarDesde(10)"
+                <a (click)="cargarDesde(10)"
                   class="-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150"
                   aria-label="Next">
                   <!-- Heroicon name: chevron-right -->

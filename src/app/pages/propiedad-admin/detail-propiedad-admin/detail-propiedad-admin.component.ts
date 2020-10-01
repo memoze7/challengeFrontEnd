@@ -97,7 +97,7 @@ export class DetailPropiedadAdminComponent implements OnInit, OnDestroy {
   }
 
   guardar() {
-    console.log(this.forma);
+
     if (this.forma.invalid) return
 
     const { titulo, direccion, ciudad, pais, habitaciones, banios, precio } = this.forma.value;

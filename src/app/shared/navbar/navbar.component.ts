@@ -3,7 +3,7 @@ import { AbrirModalAuth } from './../../store/actions/auth/auth.actions';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { AppState } from 'src/app/store/app.reducers';
-import * as ownActions from './../../store/actions/auth/auth.actions';
+import * as ownActions from './../../store/actions';
 import { Router } from '@angular/router';
 
 
@@ -23,6 +23,13 @@ export class NavbarComponent implements OnInit {
   openAuth(module: string): void {
     this._store.dispatch(ownActions.AbrirModalAuth());
     this._router.navigate([{ outlets: { auth: module } }]);
+  }
+
+  mostrarCuenta() {
+    this._store.dispatch(ownActions.seleccionarUsuario({ usuario: this.usuarioService.usuario }));
+    this._router.navigate([{ outlets: { detail: 'detail' } }]);
+    this._store.dispatch(ownActions.AbrirModalModalDetail());
+    this.isOpen = false;
   }
 
 

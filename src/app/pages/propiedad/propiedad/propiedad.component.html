@@ -1,5 +1,19 @@
-<div class="py-12 pl-8">
-  <div class="grid grid-cols-1 gap-8 lg:px-32 sm:grid-cols-2 sm:gap-12 xl:grid-cols-3 xl:gap-20">
+<div class="py-12 pl-8 pr-8">
+  <div class="flex justify-end items-start ">
+    <!-- input de busqueda -->
+    <mat-form-field appearance="outline" class="font-sans">
+      <mat-label>Buscar</mat-label>
+      <input #input matInput placeholder="buscar" (keyup)="buscarPropiedad($event.target.value)" type="text">
+      <button matSuffix class="text-indigo-600 h-full focus:outline-none">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd"
+            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </button>
+    </mat-form-field> <!-- fin e input de busqueda -->
+  </div>
+  <div class="grid grid-cols-1 gap-8  sm:grid-cols-2 sm:gap-12 xl:grid-cols-3 xl:gap-20">
     <div *ngFor="let propiedad of propiedades">
       <app-card [propiedad]="propiedad"></app-card>
     </div>

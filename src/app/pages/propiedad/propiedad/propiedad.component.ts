@@ -39,6 +39,22 @@ export class PropiedadComponent implements OnInit {
 
   }
 
+  buscarPropiedad(termino: string) {
+    if (termino.length <= 0) {
+      this.cargarPropiedades();
+      return;
+    }
+
+    this.cargando = true;
+    this.propiedades = [];
+    this._propiedadesService.buscarPropiedades(termino)
+      .subscribe((propiedades: PropiedadModel[]) => {
+        this.cargando = false;
+        this.propiedades = [...propiedades];
+        this.paginado = false;
+      });
+  }
+
 
 
 }

@@ -51,8 +51,11 @@ export class UsuarioService {
   }
 
   cargarUsuarios(desde: number = 0) {
-    let url = URL_SERVICIOS
+    const url = `${URL_SERVICIOS}/usuario?desde=${desde}`;
+    return this._http.get(url);
   }
+
+
 
   crearUsuario(usuario: UsuarioModel) {
     let url = URL_SERVICIOS + '/usuario';
@@ -83,10 +86,29 @@ export class UsuarioService {
 
     this._router.navigate(['/']);
   }
-  // borrarUsuario(usuario: UsuarioModel) {
-  // if(usuario._id === this._usuarioService.getId()) {
-  //   Swal.fire('No puede borrar usuario', 'No se puede borrar a si mismo', 'error');
-  //   return
-  // }
-  // }
+
+  actualizarUsuario(usuario: UsuarioModel) {
+
+    const url = `${URL_SERVICIOS}/usuario/${usuario._id}?token=${this.token}`;
+    return this._http.put(url, usuario);
+  }
+
+  cambiarImagen(imagen: string) {
+    const usuario: UsuarioModel = { ...this.usuario }
+    usuario.img = imagen;
+    this.guardarLS(usuario._id, this.token, usuario);
+  }
+
+  buscarUsuarios(terminos: string) {
+
+    const url = `${URL_SERVICIOS}/buscar/coleccion/usuarios/${terminos}`;
+    return this._http.get(url).pipe(
+      map((resp: any) => resp.usuarios)
+    );
+  }
+
+  borrarUsuario(usuario: UsuarioModel) {
+    const url = `${URL_SERVICIOS}/usuario/${usuario._id}?token=${this.getToken()}`;
+    return this._http.delete(url);
+  }
 }

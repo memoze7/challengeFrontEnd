@@ -75,6 +75,10 @@
   padding: 0.1em 0px 0.7rem !important;
 }
 
+::ng-deep .mat-form-field-prefix {
+  transform: translateY(-4px) !important;
+}
+
 ::ng-deep .mat-form-field-label-wrapper {
   top: -1.5em;
 }
