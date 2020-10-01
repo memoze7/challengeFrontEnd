@@ -27,7 +27,7 @@ export class InterceptorService implements HttpInterceptor {
 
   manejaError(error: HttpErrorResponse) {
     console.warn(error.error);
-    Swal.fire(error.error.message, error.error.errors.message, 'error')
+    Swal.fire(error.error.message, error.error.errors.message, 'error');
 
     return throwError('Manejo de errores');
   };
