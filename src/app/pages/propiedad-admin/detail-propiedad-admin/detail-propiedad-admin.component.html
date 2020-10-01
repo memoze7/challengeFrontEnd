@@ -54,32 +54,46 @@
             <mat-label>Titulo</mat-label>
             <input matInput placeholder="Ej. Casa bonita en el centro de la ciudad" formControlName="titulo"
               name='titulo' cdkFocusInitial>
+            <mat-error *ngIf="forma.get('titulo').hasError('required')">Por favor ingrese un titulo</mat-error>
 
           </mat-form-field>
           <mat-form-field appearance="outline" class="col-span-2">
             <mat-label>Dirección</mat-label>
             <input matInput formControlName="direccion" name='direccion'>
+            <mat-error *ngIf="forma.get('direccion').hasError('required')">Por favor ingrese una dirección</mat-error>
+
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Ciudad</mat-label>
             <input matInput formControlName="ciudad" name='ciudad'>
+            <mat-error *ngIf="forma.get('ciudad').hasError('required')">Por favor ingrese una ciudad</mat-error>
+
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>País</mat-label>
             <input matInput formControlName="pais" name='pais'>
+            <mat-error *ngIf="forma.get('ciudad').hasError('required')">Por favor ingrese un país</mat-error>
+
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>N° Habitaciones</mat-label>
             <input matInput formControlName="habitaciones" name='habitaciones' type="number">
+            <mat-error *ngIf="forma.get('habitaciones').hasError('required')">Por favor ingrese el N° de habitaciones
+            </mat-error>
+
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>N° Baños</mat-label>
             <input matInput formControlName="banios" name='banios' type="number">
+            <mat-error *ngIf="forma.get('banios').hasError('required')">Por favor ingrese el N° de baños</mat-error>
+
           </mat-form-field>
           <mat-form-field appearance="outline" class="col-span-2">
             <mat-label>Precio</mat-label>
-            <input matInput placeholder="Ej. 1900000" formControlName="precio" name='precio' type="number">
+            <input matInput placeholder="Ej. 1900000" formControlName="precio" name='precio' type="precio">
             <span matPrefix>$&nbsp;</span>
+            <mat-error *ngIf="forma.get('precio').hasError('required')">Por favor ingrese el precio por semana de la
+              propiedad</mat-error>
           </mat-form-field>
         </div>
       </div>

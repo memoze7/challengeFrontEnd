@@ -22,7 +22,7 @@
     <mat-form-field appearance="outline">
       <mat-label>Nombre</mat-label>
       <input matInput formControlName="nombre" name='nombre' cdkFocusInitial [disableControl]='cargando'>
-      <mat-error *ngIf="forma.get('email').hasError('required')">Por favor ingrese su nombre</mat-error>
+      <mat-error *ngIf="forma.get('nombre').hasError('required')">Por favor ingrese su nombre</mat-error>
 
     </mat-form-field>
     <mat-form-field appearance="outline">

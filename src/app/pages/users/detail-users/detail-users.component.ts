@@ -5,7 +5,7 @@ import { UsuarioModel } from './../../../models/UsuarioModel';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AppState } from 'src/app/store/app.reducers';
 import * as ownActions from './../../../store/actions';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -21,7 +21,7 @@ export class DetailUsersComponent implements OnInit, OnDestroy {
   forma: FormGroup;
 
   constructor(private _store: Store<AppState>, private _fb: FormBuilder,
-    private _usuarioService: UsuarioService) { }
+    public _usuarioService: UsuarioService,) { }
 
   ngOnInit(): void {
     this.crearForma();
@@ -52,8 +52,8 @@ export class DetailUsersComponent implements OnInit, OnDestroy {
 
   crearForma(): void {
     this.forma = this._fb.group({
-      nombre: [null],
-      email: [null],
+      nombre: [null, Validators.required],
+      email: [null, [Validators.required, Validators.email]],
       role: [null]
     });
 
@@ -101,15 +101,40 @@ export class DetailUsersComponent implements OnInit, OnDestroy {
     this._store.dispatch(ownActions.AbrirModalSubirArchivo({ id: this.usuario?._id, tipo: 'usuarios' }));
   }
 
-  borrarUsuario() {
-    if (this.forma.invalid) return
+  borrarUsuario(borrarUsuario: UsuarioModel) {
+    Swal.fire({
+      title: '¿Está usted esta seguro?',
+      text: `Esta a punto de borrar al usuario ${borrarUsuario.nombre} definitivamente`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        this.showLoading('Borrando usuario')
+        this._usuarioService.borrarUsuario(borrarUsuario).subscribe(
+          (resp: any) => {
+            Swal.fire('Usuario borrado', resp.usuario.nombre, 'success');
+            this._store.dispatch(ownActions.ActualizarPropiedades());
+            this.ocultar();
 
-    const { nombre, email, role } = this.forma.value;
+          }
+        )
+      }
+    });
+  }
 
-
+  showLoading(title: string): void {
+    Swal.fire({
+      title,
+      allowOutsideClick: false
+    });
+    Swal.showLoading();
 
   }
 
-
-
 }
+
+
+
+

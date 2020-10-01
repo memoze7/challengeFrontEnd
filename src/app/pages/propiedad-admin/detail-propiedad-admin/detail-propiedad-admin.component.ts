@@ -6,7 +6,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AppState } from 'src/app/store/app.reducers';
 import { Store } from '@ngrx/store';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2'
 
 @Component({
@@ -73,13 +73,13 @@ export class DetailPropiedadAdminComponent implements OnInit, OnDestroy {
 
   crearForma(): void {
     this.forma = this._fb.group({
-      titulo: [null],
-      direccion: [null],
-      ciudad: [null],
-      pais: [null],
-      habitaciones: [null],
-      banios: [null],
-      precio: [null]
+      titulo: [null, Validators.required],
+      direccion: [null, Validators.required],
+      ciudad: [null, Validators.required],
+      pais: [null, Validators.required],
+      habitaciones: [null, Validators.required],
+      banios: [null, Validators.required],
+      precio: [null, Validators.required]
     });
 
   }

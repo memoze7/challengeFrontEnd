@@ -89,6 +89,8 @@ export class ModalUploadComponent implements OnInit, OnDestroy {
         Swal.fire('Imagen cambiada', '', 'success');
         this._store.dispatch(ownActions.ActualizarPropiedades
           ());
+        this._store.dispatch(ownActions.ActualizarUsuarios
+          ());
         this._store.dispatch(ownActions.SubirArchivo({ imagenTemp: this.imagenTemp, archivo: this.imagenSubir }));
 
         this.ocultar();
